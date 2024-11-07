@@ -1,11 +1,11 @@
 ## Type declaration for the function<br>
 square :: Int -> Int<br>
 square n = n ^ 2<br>
-<br>
+
 ## A variable<br>
 mypi :: Float<br>
 mypi = 3.1415<br>
-<br>
+
 ## Basic data types<br>
 && and<br>
 || or<br>
@@ -15,7 +15,7 @@ Float floating point<br>
 Double floating point with more precision<br>
 Int integer maximum 2147483647<br>
 Arbitrarily large integers need the data type Integer data type<br>
-<br>
+
 ## Arithmetic operators<br>
 + addition<br>
 - subtraction<br>
@@ -24,7 +24,7 @@ Arbitrarily large integers need the data type Integer data type<br>
 ^ power<br>
 div whole number division (prefix)<br>
 mod remainder from whole number division (prefix)<br>
-<br>
+
 ## Relational operators<br>
 > greater than<br>
 >= greater than or equal to<br>
@@ -32,16 +32,16 @@ mod remainder from whole number division (prefix)<br>
 /= not equal to<br>
 <= less than or equal to<br>
 < less than<br>
-<br>
+
 ## Conversion from Int to Float<br>
 fromIntegral(floor 5.6) + 6.7<br>
 11.7<br>
-<br>
+
 ## Commenting<br>
 -- precedes a one-line comment<br>
 {- this is a block of<br>
 comments -}<br>
-<br>
+
 ## Guards<br>
 A boolean expression used in a conditional expression in<br>
 Haskell is called a guard. Here's an example:<br>
@@ -50,7 +50,7 @@ max3 x y z<br>
 | x >= y && x >= z = x<br>
 | y >= z = y<br>
 | otherwise = z<br>
-<br>
+
 ## Iteration == recursion<br>
 Let's say you want to define a function that takes a<br>
 non-negative integer n as a parameter and returns the sum<br>
@@ -61,7 +61,7 @@ sumints :: Int -> Int<br>
 sumints n<br>
 | n == 1 = 1<br>
 | otherwise = n + sumints (n - 1)<br>
-<br>
+
 ## Tail recursion<br>
 fact_tr :: Int -> Int<br>
 fact_tr n = fact_tr_helper n 1<br>
@@ -71,7 +71,7 @@ fact_tr_helper n product<br>
 | n == 0 = product<br>
 | otherwise = fact_tr_helper (n - 1) (product * n)<br>
 With tail recursion, the work happens inside the recursive function call<br>
-<br>
+
 ## Lists<br>
 List: a collection of an arbitrary number of values or items<br>
 all of the same type. The empty list [ ] is a list.<br>
@@ -90,7 +90,7 @@ indicating types of lists<br>
 [1,2,3] :: [Int] -- the list [1,2,3] is a list of Int types<br>
 [7.1, 8.2, 4.5] :: [Float]<br>
 ['a','b','c'] :: [Char] -- which is also a String "abc"<br>
-<br>
+
 ## List operations<br>
 : is the constructor function (equivalent of 'cons' in LISP or '.' or '|' in Prolog)<br>
 1:[] ~> [1]<br>
@@ -129,7 +129,7 @@ zip [1,2] [3,4] ~> [(1,3),(2,4)]<br>
 zip [1,2] [3,4,5] ~> [(1,3),(2,4)]<br>
 zip [1,2,3] [4,5] ~> [(1,4),(2,5)]<br>
 zip "ab" "cd" ~> [('a','c'),('b','d')]<br>
-<br>
+
 ## Tuples<br>
 A tuple is another kind of collection: it's a fixed number of elements of possibly different types.<br>
 (1,3) :: (Int,Int)<br>
@@ -139,14 +139,14 @@ We can give tuple types names like this:<br>
 type RentalCar = (String,String,Int,Float)<br>
 and the type of a list of rental cars can be named like this<br>
 type AvailableCars = [RentalCar]<br>
-<br>
+
 ## Automated type checking<br>
 myelem :: (Eq a) => a -> [a] -> Bool<br>
 myelem item inlist<br>
 | null inlist = False<br>
 | item == head inlist = True<br>
 | otherwise = myelem item (tail inlist)<br>
-<br>
+
 ## Pattern<br>
 Using patterns, we can write this <br>
 <br>
