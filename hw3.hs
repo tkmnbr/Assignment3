@@ -1,5 +1,3 @@
-{-# OPTIONS_GHC -Wno-x-partial -Wno-unrecognised-warning-flags #-}
-
 -- Q1
 -- without pattern matching
 myremoveduplicates :: (Eq a) => [a] -> [a]
@@ -61,12 +59,12 @@ mylast_pm (x:xs) = mylast_pm xs
 myreverse :: [a] -> [a]
 myreverse list
     | null list = []
-    | otherwise = reverse list
+    | otherwise = myreverse (tail list) ++ [head list]
 
 -- with pattern matching
 myreverse_pm :: [a] -> [a]
 myreverse_pm [] = []
-myreverse_pm (x:xs) = reverse (x:xs)
+myreverse_pm (x:xs) = myreverse_pm xs ++ [x]
 
 -- Q6
 -- without pattern matching
@@ -102,4 +100,46 @@ myordered_pm (x:y:xs)
 
 -- Q8
 computeFees :: String -> Int
-computeFees input = 0
+computeFees input = computeFees_helper (splitBySemicolon input)
+
+splitBySemicolon :: String -> [String]
+splitBySemicolon str = splitBySemicolon_helper str []
+
+splitBySemicolon_helper :: String -> String -> [String]
+splitBySemicolon_helper [] current = [current]
+splitBySemicolon_helper (x:xs) current
+  | x == ';' = current : splitBySemicolon_helper xs []
+  | otherwise = splitBySemicolon_helper xs (current ++ [x])
+
+computeFees_helper :: [String] -> Int
+computeFees_helper (id:firstName:lastName:age:credit:rest)
+    | head rest == "N" = computeFees_nonDegreeSeeking credit (head (tail rest))
+    | head rest == "Y" = computeFees_degreeSeeking credit (head (tail(tail(tail rest)))) (head (tail(tail(tail(tail rest)))))
+    | otherwise = error "Unknown student type"
+
+computeFees_nonDegreeSeeking :: String -> String -> Int
+computeFees_nonDegreeSeeking studentType credit
+    | studentType == "C" = 700 + 300 * (read credit)
+    | studentType == "S" = studentTypeSeniorCitizen (read credit)
+    | otherwise = error "Unknown student type"
+
+studentTypeSeniorCitizen :: Int -> Int
+studentTypeSeniorCitizen credit
+    | credit <= 6 = 100
+    | otherwise = 100 + 50 * (credit - 6)
+
+computeFees_degreeSeeking :: String -> String -> String -> Int
+computeFees_degreeSeeking credit isFinancialAid isFinancialAidAmount
+    | isFinancialAid == "N" = computeFees_degreeseeking_noFinAid credit
+    | isFinancialAid == "Y" = computeFees_degreeseeking_finAid credit (read isFinancialAidAmount)
+    | otherwise = error "Unknown financial aid status"
+
+computeFees_degreeseeking_noFinAid :: String -> Int
+computeFees_degreeseeking_noFinAid credit
+    | (read credit) <= 12 = 100 + 50 + 275 * (read credit)
+    | otherwise = 100 + 50 + 275 * 12
+
+computeFees_degreeseeking_finAid :: String -> Int -> Int
+computeFees_degreeseeking_finAid credit financialAid
+    | (read credit) <= 12 = 100 + 50 + 275 * (read credit) - financialAid
+    | otherwise = 100 + 50 + 275 * 12 - financialAid
