@@ -118,10 +118,10 @@ computeFees_helper (id:firstName:lastName:age:credit:rest)
     | otherwise = error "Unknown student type"
 
 computeFees_nonDegreeSeeking :: String -> String -> Int
-computeFees_nonDegreeSeeking studentType credit
+computeFees_nonDegreeSeeking credit studentType 
     | studentType == "C" = 700 + 300 * (read credit)
     | studentType == "S" = studentTypeSeniorCitizen (read credit)
-    | otherwise = error "Unknown student type"
+    | otherwise = error "Unknown non degree seeking student type"
 
 studentTypeSeniorCitizen :: Int -> Int
 studentTypeSeniorCitizen credit
