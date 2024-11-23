@@ -91,7 +91,7 @@ myordered list
     | otherwise = False
 
 -- with pattern matching
-myordered_pm :: (Ord a) => [a] -> Bool
+myordered_pm:: (Ord a) => [a] -> Bool
 myordered_pm [] = True
 myordered_pm [_] = True
 myordered_pm (x:y:xs)

@@ -75,15 +75,11 @@ With tail recursion, the work happens inside the recursive function call<br>
 ## Lists<br>
 List: a collection of an arbitrary number of values or items<br>
 all of the same type. The empty list [ ] is a list.<br>
-Fundamental data structure of functional programming<br>
-languages...represent arrays, trees, graphs, whatever.<br>
+Fundamental data structure of functional programming languages...represent arrays, trees, graphs, whatever.<br>
 [1,2,3] -- ok<br>
 [7.1, 8.2, 4.5] -- ok<br>
-[1, 2.0, 3, 4.7] -- this works too...Haskell promotes<br>
-literal Int types to Float without loss<br>
-of information<br>
-['a','b','c'] -- ok, and note that a list of characters<br>
-is a string<br>
+[1, 2.0, 3, 4.7] -- this works too...Haskell promotes literal Int types to Float without loss of information<br>
+['a','b','c'] -- ok, and note that a list of characters is a string<br>
 ['a',1,'c'] -- not so good<br>
 <br>
 indicating types of lists<br>
@@ -227,6 +223,16 @@ myinsert x [] = x<br>
 myinsert x (y:ys)<br>
 | x <= y = x:(y:ys)<br>
 | y:(myinsert x ys)<br>
+
+## The Map Function<br>
+The map function takes two arguments: a function which itself expects a single argument of some type, and a list of items of the same type. map then applies the function passed as the first argument to each of the elements of the second argument, collects the results in a list and returns that list.<br>
+
+Defenition<br>
+map :: (a -> b) -> [a] -> [b]<br>
+map fcn [] = []<br>
+map fcn (x:xs) = fcn x : map fcn xs<br>
+
+Continue on lec11 p 46
 
 
 
